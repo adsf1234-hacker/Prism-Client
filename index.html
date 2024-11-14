@@ -25,22 +25,34 @@
         .status-box { margin-top: 30px; color: #00e676; font-size: 1.2rem; }
 
         .logo { max-width: 150px; margin-bottom: 30px; }
+        .social-icons { margin-top: 20px; font-size: 1.5rem; color: #00e676; }
+        .social-icons a { margin: 0 10px; text-decoration: none; color: inherit; }
+        .social-icons a:hover { color: #00c853; }
+
+        .progress-bar-container { width: 100%; background-color: #333; border-radius: 5px; margin-top: 20px; }
+        .progress-bar { height: 10px; width: 0%; background-color: #00e676; border-radius: 5px; }
+
+        .version-option img { width: 30px; height: 30px; margin-right: 10px; vertical-align: middle; }
     </style>
 </head>
 <body>
     <div class="launcher-container">
         <img src="minecraft_title.png" alt="Prism Logo" class="logo">
         <h1>Prism Minecraft Launcher</h1>
-        <p>Choose your version and start your Minecraft adventure!</p>
+        <p>Select your version and start your adventure!</p>
 
-        <select id="version">
+        <select id="version" onchange="updateVersionDisplay()">
             <option value="1.8.8">1.8.8</option>
         </select>
 
-        <button class="play-button" onclick="launchPrism()">Launch Prism</button>
-
         <div class="status-box">
             <p>Status: Ready</p>
+        </div>
+
+        <button class="play-button" onclick="launchPrism()">Launch Prism</button>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
 
         <div class="footer-links">
@@ -48,13 +60,38 @@
             <a href="https://discord.com/invite/prism" target="_blank">Discord</a>
             <a href="https://www.prism.com" target="_blank">Website</a>
         </div>
+
+        <div class="social-icons">
+            <a href="https://twitter.com/prism" target="_blank">Twitter</a>
+            <a href="https://instagram.com/prism" target="_blank">Instagram</a>
+            <a href="https://facebook.com/prism" target="_blank">Facebook</a>
+        </div>
     </div>
 
     <script>
         function launchPrism() {
             const version = document.getElementById("version").value;
             alert(`Launching Prism with Minecraft version ${version}`);
-            // Add game launch functionality here
+            updateProgressBar();
+            // Add more logic to launch the Minecraft version
+        }
+
+        function updateVersionDisplay() {
+            const version = document.getElementById("version").value;
+            console.log(`Selected version: ${version}`);
+        }
+
+        function updateProgressBar() {
+            let progress = 0;
+            const progressBar = document.getElementById("progressBar");
+            const interval = setInterval(function() {
+                if (progress < 100) {
+                    progress += 10;
+                    progressBar.style.width = progress + '%';
+                } else {
+                    clearInterval(interval);
+                }
+            }, 500);
         }
     </script>
 </body>
