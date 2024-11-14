@@ -73,7 +73,13 @@
             <a href="https://discord.com/invite/prism" target="_blank">Discord</a>
             <a href="https://www.prism.com" target="_blank">Website</a>
         </div>
-        
+
+        <div class="social-icons">
+            <a href="https://twitter.com/prism" target="_blank">Twitter</a>
+            <a href="https://instagram.com/prism" target="_blank">Instagram</a>
+            <a href="https://facebook.com/prism" target="_blank">Facebook</a>
+        </div>
+
         <label for="themeSelect">Choose a Theme:</label>
         <select id="themeSelect" onchange="changeTheme()">
             <option value="dark">Dark Mode</option>
@@ -88,10 +94,7 @@
         let countdownTimer = null;
 
         function launchPrism() {
-            const version = document.getElementById("version").value;
-            alert(`Launching Prism with Minecraft version ${version}`);
-            updateProgressBar();
-            startCountdown();
+            window.location.href = "https://github.com/adsf1234-hacker/Prism-Client/blob/main/EaglercraftX_1.8_Offline_en_US.html";
         }
 
         function updateProgressBar() {
