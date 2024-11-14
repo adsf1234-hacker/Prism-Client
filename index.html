@@ -5,60 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prism Minecraft Launcher</title>
     <style>
-        /* Reset and body styling */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background-color: #1e1e1e; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        
-        /* Launcher styling */
-        .launcher-container { width: 90%; max-width: 600px; background-color: #333; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); }
-        .header { margin-bottom: 20px; }
-        h1 { color: #00e676; font-size: 2rem; margin-bottom: 10px; }
-        p { color: #aaa; margin-bottom: 15px; }
-        
-        /* Play button */
-        .play-button { background-color: #00e676; color: #fff; font-size: 1.2rem; padding: 10px 40px; border: none; border-radius: 5px; cursor: pointer; transition: 0.3s ease; }
+        body { font-family: Arial, sans-serif; background-color: #181818; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+
+        .launcher-container { background-color: #222; padding: 30px 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); width: 80%; max-width: 600px; }
+
+        h1 { color: #00e676; font-size: 3rem; margin-bottom: 20px; }
+        p { font-size: 1.1rem; color: #999; margin-bottom: 20px; }
+
+        select { background-color: #333; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; font-size: 1rem; margin-bottom: 20px; }
+
+        .play-button { background-color: #00e676; color: white; font-size: 1.2rem; padding: 15px 40px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease; width: 100%; }
         .play-button:hover { background-color: #00c853; }
-        
-        /* Dropdown and version selection */
-        .version-select { margin: 20px 0; }
-        select { padding: 10px; font-size: 1rem; border-radius: 5px; border: none; }
-        
-        /* Footer links */
-        .footer-links { margin-top: 20px; font-size: 0.9rem; color: #00e676; }
-        .footer-links a { color: #00e676; text-decoration: none; }
+
+        .footer-links { margin-top: 30px; font-size: 1rem; color: #00e676; }
+        .footer-links a { color: #00e676; text-decoration: none; margin: 0 10px; }
         .footer-links a:hover { text-decoration: underline; }
+
+        .status-box { margin-top: 30px; color: #00e676; font-size: 1.2rem; }
+
+        .logo { max-width: 150px; margin-bottom: 30px; }
+        .social-icons { margin-top: 20px; font-size: 1.5rem; color: #00e676; }
+        .social-icons a { margin: 0 10px; text-decoration: none; color: inherit; }
+        .social-icons a:hover { color: #00c853; }
     </style>
 </head>
 <body>
     <div class="launcher-container">
-        <div class="header">
-            <h1>Prism Minecraft Launcher</h1>
-            <p>Select your preferred version and start the game.</p>
-        </div>
+        <img src="logo.png" alt="Prism Logo" class="logo">
+        <h1>Prism Minecraft Launcher</h1>
+        <p>Choose your version and start your Minecraft adventure!</p>
 
-        <div class="version-select">
-            <label for="version">Select Version:</label>
-            <select id="version">
-                <option value="1.8.8">1.8.8</option>
-                <option value="1.12.2">1.12.2</option>
-                <option value="1.16.5">1.16.5</option>
-                <option value="1.18.1">1.18.1</option>
-                <!-- Add more versions as needed -->
-            </select>
-        </div>
+        <select id="version">
+            <option value="1.8.8">1.8.8</option>
+            <option value="1.12.2">1.12.2</option>
+            <option value="1.16.5">1.16.5</option>
+            <option value="1.18.1">1.18.1</option>
+            <option value="1.19">1.19</option>
+            <!-- More versions can be added here -->
+        </select>
 
         <button class="play-button" onclick="launchPrism()">Launch Prism</button>
 
+        <div class="status-box">
+            <p>Status: Ready</p>
+        </div>
+
         <div class="footer-links">
-            <p><a href="#support">Support</a> | <a href="#discord">Discord</a> | <a href="#website">Website</a></p>
+            <a href="https://support.prism.com" target="_blank">Support</a>
+            <a href="https://discord.com/invite/prism" target="_blank">Discord</a>
+            <a href="https://www.prism.com" target="_blank">Website</a>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://twitter.com/prism" target="_blank">Twitter</a>
+            <a href="https://instagram.com/prism" target="_blank">Instagram</a>
+            <a href="https://facebook.com/prism" target="_blank">Facebook</a>
         </div>
     </div>
 
     <script>
         function launchPrism() {
             const version = document.getElementById("version").value;
-            alert("Launching Prism with version " + version); 
-            // Placeholder: Add code here to launch the game based on the selected version.
+            alert(`Launching Prism with Minecraft version ${version}`);
+            // Add game launch functionality here
         }
     </script>
 </body>
