@@ -6,54 +6,67 @@
     <title>Prism Minecraft Launcher</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background-color: #181818; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; transition: all 0.3s ease; }
 
-        .launcher-container { background-color: #222; padding: 30px 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); width: 80%; max-width: 600px; }
+        .launcher-container { padding: 40px 50px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); width: 80%; max-width: 600px; transition: background-color 0.3s ease, color 0.3s ease; }
+        h1 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); }
+        p { font-size: 1.2rem; margin-bottom: 20px; }
 
-        h1 { color: #00e676; font-size: 3rem; margin-bottom: 20px; }
-        p { font-size: 1.1rem; color: #999; margin-bottom: 20px; }
+        select, .play-button { font-size: 1.2rem; padding: 15px 25px; border-radius: 5px; cursor: pointer; }
+        select { background-color: #333; color: #fff; border: none; margin-bottom: 20px; width: 100%; }
+        .play-button { background-color: grey; color: white; border: none; transition: background-color 0.3s ease; width: 100%; }
+        .play-button:hover { background-color: #8c8c8c; }
 
-        select { background-color: #333; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; font-size: 1rem; margin-bottom: 20px; }
-
-        .play-button { background-color: #00e676; color: white; font-size: 1.2rem; padding: 15px 40px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease; width: 100%; }
-        .play-button:hover { background-color: #00c853; }
-
-        .footer-links { margin-top: 30px; font-size: 1rem; color: #00e676; }
-        .footer-links a { color: #00e676; text-decoration: none; margin: 0 10px; }
+        .footer-links { margin-top: 30px; font-size: 1rem; }
+        .footer-links a { color: inherit; text-decoration: none; margin: 0 15px; }
         .footer-links a:hover { text-decoration: underline; }
 
-        .status-box { margin-top: 30px; color: #00e676; font-size: 1.2rem; }
-
-        .logo { max-width: 150px; margin-bottom: 30px; }
-        .social-icons { margin-top: 20px; font-size: 1.5rem; color: #00e676; }
+        .social-icons { margin-top: 20px; font-size: 1.5rem; }
         .social-icons a { margin: 0 10px; text-decoration: none; color: inherit; }
-        .social-icons a:hover { color: #00c853; }
+        .social-icons a:hover { color: inherit; }
 
-        .progress-bar-container { width: 100%; background-color: #333; border-radius: 5px; margin-top: 20px; }
-        .progress-bar { height: 10px; width: 0%; background-color: #00e676; border-radius: 5px; }
+        /* Dark mode */
+        body.dark { background-color: #121212; color: #fff; }
+        .launcher-container.dark { background-color: #1f1f1f; color: #fff; }
+        .play-button.dark { background-color: grey; }
+        .footer-links a.dark { color: grey; }
+        .social-icons a.dark { color: grey; }
 
-        .version-option img { width: 30px; height: 30px; margin-right: 10px; vertical-align: middle; }
+        /* Light mode */
+        body.light { background-color: #f0f0f0; color: #333; }
+        .launcher-container.light { background-color: #fff; color: #333; }
+        .play-button.light { background-color: grey; }
+        .footer-links a.light { color: grey; }
+        .social-icons a.light { color: grey; }
+
+        /* Amethyst mode */
+        body.amethyst { background-color: #9b4dca; color: #fff; }
+        .launcher-container.amethyst { background-color: rgba(155, 77, 202, 0.8); color: #fff; }
+        .play-button.amethyst { background-color: purple; }
+        .footer-links a.amethyst { color: purple; }
+        .social-icons a.amethyst { color: purple; }
+
+        /* Cherry mode */
+        body.cherry { background-color: #ff1e56; color: #fff; }
+        .launcher-container.cherry { background-color: rgba(255, 30, 86, 0.8); color: #fff; }
+        .play-button.cherry { background-color: magenta; }
+        .footer-links a.cherry { color: magenta; }
+        .social-icons a.cherry { color: magenta; }
     </style>
 </head>
-<body>
+<body class="dark">
     <div class="launcher-container">
         <img src="minecraft_title.png" alt="Prism Logo" class="logo">
         <h1>Prism Minecraft Launcher</h1>
-        <p>Select your version and start your adventure!</p>
+        <p>Select your version and get ready for adventure!</p>
 
-        <select id="version" onchange="updateVersionDisplay()">
+        <select id="version">
             <option value="1.8.8">1.8.8</option>
         </select>
 
-        <div class="status-box">
-            <p>Status: Ready</p>
-        </div>
-
         <button class="play-button" onclick="launchPrism()">Launch Prism</button>
 
-        <div class="progress-bar-container">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
+        <div class="countdown" id="countdown">Countdown: 10</div>
 
         <div class="footer-links">
             <a href="https://support.prism.com" target="_blank">Support</a>
@@ -66,19 +79,25 @@
             <a href="https://instagram.com/prism" target="_blank">Instagram</a>
             <a href="https://facebook.com/prism" target="_blank">Facebook</a>
         </div>
+
+        <label for="themeSelect">Choose a Theme:</label>
+        <select id="themeSelect" onchange="changeTheme()">
+            <option value="dark">Dark Mode</option>
+            <option value="light">Light Mode</option>
+            <option value="amethyst">Amethyst Mode</option>
+            <option value="cherry">Cherry Mode</option>
+        </select>
     </div>
 
     <script>
+        let countdownValue = 10;
+        let countdownTimer = null;
+
         function launchPrism() {
             const version = document.getElementById("version").value;
             alert(`Launching Prism with Minecraft version ${version}`);
             updateProgressBar();
-            // Add more logic to launch the Minecraft version
-        }
-
-        function updateVersionDisplay() {
-            const version = document.getElementById("version").value;
-            console.log(`Selected version: ${version}`);
+            startCountdown();
         }
 
         function updateProgressBar() {
@@ -92,6 +111,27 @@
                     clearInterval(interval);
                 }
             }, 500);
+        }
+
+        function startCountdown() {
+            if (countdownTimer !== null) clearInterval(countdownTimer);
+
+            countdownTimer = setInterval(function() {
+                countdownValue--;
+                document.getElementById("countdown").textContent = `Countdown: ${countdownValue}`;
+                if (countdownValue === 0) {
+                    clearInterval(countdownTimer);
+                    alert("Minecraft is now launching!");
+                    countdownValue = 10;
+                }
+            }, 1000);
+        }
+
+        function changeTheme() {
+            const theme = document.getElementById('themeSelect').value;
+            document.body.className = theme;
+            const playButton = document.querySelector('.play-button');
+            playButton.className = 'play-button ' + theme;
         }
     </script>
 </body>
