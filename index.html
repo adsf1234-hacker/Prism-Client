@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prism Minecraft Launcher</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; transition: all 0.3s ease; }
+
+        .launcher-container { padding: 40px 50px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); width: 80%; max-width: 600px; transition: background-color 0.3s ease, color 0.3s ease; }
+        h1 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); }
+        p { font-size: 1.2rem; margin-bottom: 20px; }
+
+        select, .play-button { font-size: 1.2rem; padding: 15px 25px; border-radius: 5px; cursor: pointer; }
+        select { background-color: #333; color: #fff; border: none; margin-bottom: 20px; width: 100%; }
+        .play-button { background-color: grey; color: white; border: none; transition: background-color 0.3s ease; width: 100%; }
+        .play-button:hover { background-color: #8c8c8c; }
+
+        .footer-links { margin-top: 30px; font-size: 1rem; }
+        .footer-links a { color: inherit; text-decoration: none; margin: 0 15px; }
+        .footer-links a:hover { text-decoration: underline; }
+
+        .social-icons { margin-top: 20px; font-size: 1.5rem; }
+        .social-icons a { margin: 0 10px; text-decoration: none; color: inherit; }
+        .social-icons a:hover { color: inherit; }
+
+        /* Dark mode */
+        body.dark { background-color: #121212; color: #fff; }
+        .launcher-container.dark { background-color: #1a1a1a; color: #fff; }
+        .play-button.dark { background-color: #4e4e4e; }
+        .footer-links a.dark { color: #ccc; }
+        .social-icons a.dark { color: #ccc; }
+
+        /* Light mode */
+        body.light { background-color: #f0f0f0; color: #333; }
+        .launcher-container.light { background-color: #f7f7f7; color: #333; }
+        .play-button.light { background-color: #b3b3b3; }
+        .footer-links a.light { color: #777; }
+        .social-icons a.light { color: #777; }
+
+        /* Amethyst mode */
+        body.amethyst { background-color: #9b4dca; color: #fff; }
+        .launcher-container.amethyst { background-color: #a65bda; color: #fff; }
+        .play-button.amethyst { background-color: #7a2d9d; }
+        .footer-links a.amethyst { color: #6a27a6; }
+        .social-icons a.amethyst { color: #6a27a6; }
+
+        /* Cherry mode */
+        body.cherry { background-color: #ff1e56; color: #fff; }
+        .launcher-container.cherry { background-color: #e01c4d; color: #fff; }
+        .play-button.cherry { background-color: #d1004e; }
+        .footer-links a.cherry { color: #d1004e; }
+        .social-icons a.cherry { color: #d1004e; }
+    </style>
+</head>
+<body class="dark">
+    <div class="launcher-container">
+        <img src="minecraft_title.png" alt="Prism Logo" class="logo">
+        <h1>Prism Minecraft Launcher</h1>
+        <p>Select your version and get ready for adventure!</p>
+
+        <select id="version">
+            <option value="1.8.8">1.8.8</option>
+        </select>
+
+        <button class="play-button" onclick="launchPrism()">Launch Prism</button>
+
+        <div class="countdown" id="countdown">Countdown: 10</div>
+
+        <div class="footer-links">
+            <a href="https://support.prism.com" target="_blank">Support</a>
+            <a href="https://discord.com/invite/prism" target="_blank">Discord</a>
+            <a href="https://www.prism.com" target="_blank">Website</a>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://twitter.com/prism" target="_blank">Twitter</a>
+            <a href="https://instagram.com/prism" target="_blank">Instagram</a>
+            <a href="https://facebook.com/prism" target="_blank">Facebook</a>
+        </div>
+
+        <label for="themeSelect">Choose a Theme:</label>
+        <select id="themeSelect" onchange="changeTheme()">
+            <option value="dark">Dark Mode</option>
+            <option value="light">Light Mode</option>
+            <option value="amethyst">Amethyst Mode</option>
+            <option value="cherry">Cherry Mode</option>
+        </select>
+    </div>
+
+    <script>
+        let countdownValue = 10;
+        let countdownTimer = null;
+
+        function launchPrism() {
+            window.location.href = "https://github.com/adsf1234-hacker/Prism-Client/blob/main/EaglercraftX_1.8_Offline_en_US.html";
+        }
+
+        function updateProgressBar() {
+            let progress = 0;
+            const progressBar = document.getElementById("progressBar");
+            const interval = setInterval(function() {
+                if (progress < 100) {
+                    progress += 10;
+                    progressBar.style.width = progress + '%';
+                } else {
+                    clearInterval(interval);
+                }
+            }, 500);
+        }
+
+        function startCountdown() {
+            if (countdownTimer !== null) clearInterval(countdownTimer);
+
+            countdownTimer = setInterval(function() {
+                countdownValue--;
+                document.getElementById("countdown").textContent = `Countdown: ${countdownValue}`;
+                if (countdownValue === 0) {
+                    clearInterval(countdownTimer);
+                    alert("Minecraft is now launching!");
+                    countdownValue = 10;
+                }
+            }, 1000);
+        }
+
+        function changeTheme() {
+            const theme = document.getElementById('themeSelect').value;
+            document.body.className = theme;
+            const playButton = document.querySelector('.play-button');
+            playButton.className = 'play-button ' + theme;
+        }
+    </script>
+</body>
+</html>
